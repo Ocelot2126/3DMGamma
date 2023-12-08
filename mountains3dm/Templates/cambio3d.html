@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3DM App</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            background-color: #ddd;
+        }
+
+        /* Contenedor del Título */
+        .titulo-container {
+            margin-top: 25px;
+            background-color: white; /* Fondo blanco para el título */
+            padding: 12px; /* Espaciado interno */
+            border-radius: 8px; /* Bordes redondeados */
+        }
+
+        /* Título */
+        h1 {
+            margin: 0;
+            font: italic bold 36px/1.5 'Impact','Roboto', monospace;
+        }
+
+        h2 {
+            margin: 0;
+            margin-bottom: 5px;
+            font: italic 20px/1.5 'Impact','Roboto', monospace;
+            
+        }
+
+        /* Contenedor central */
+        #contenedor-central {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Ajustar la imagen */
+        img {
+            max-width: 230px;
+            height: auto;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        /* Estilo del menú desplegable */
+        select {
+            width: 90%;
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 7px;
+            color: white;
+            background-color: black;
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        /* Estilo del botón */
+        button {
+            width: 40%;
+            font-size: 16px;
+            font: italic 24px/1.5 'Impact', monospace;
+            padding: 10px 20px;
+            margin: 7px;
+            text-decoration: none;
+            color: black;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+         
+        @media only screen and (max-width: 600px) {
+            img {
+                max-width: 50%;
+                height: auto;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media only screen and (min-width: 601px) {
+            body {
+                background: repeating-linear-gradient(to right, black, black 33.33%, #ddd 33.33%, #ddd 66.66%, black 66.66%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Contenedor central -->
+<div id="contenedor-central">
+    <!-- Contenedor del Título -->
+    <div class="titulo-container" alt="Logo" onclick="window.location.href='{% url 'main' %}';" style="cursor: pointer">
+        <!-- Título -->
+        <h1>3DM App</h1>
+    </div>
+
+    <!-- Imagen desde una URL con evento onclick -->
+    <img src="https://cdn.shopify.com/s/files/1/0815/5791/3873/files/logo_redondo_blanco-fotor-20231019182437.png?v=1697836252" alt="Logo" onclick="window.location.href='{% url 'main' %}';" style="cursor: pointer">
+
+    <!-- Formulario con método POST -->
+    <form id="formularioModelo3D" method="post" action="{% url 'cambio3d' %}?user={{ user_email }}">
+        {% csrf_token %}
+        
+        <!-- Encabezado para el menú desplegable -->
+        <h2>Seleccione modelo 3D a utilizar:</h2>
+
+        <!-- Menú desplegable de las 14 montañas más altas del mundo -->
+        <select name="modelo_3d">
+            <option value="Everest">Monte Everest</option>
+            <option value="K2">K2</option>
+            <option value="Kangchenjunga">Kangchenjunga</option>
+            <option value="Lhotse">Lhotse</option>
+            <option value="Makalu">Makalu</option>
+            <option value="Cho_Oyu">Cho Oyu</option>
+            <option value="Dhaulagiri">Dhaulagiri</option>
+            <option value="Manaslu">Manaslu</option>
+            <option value="Nanga_Parbat">Nanga Parbat</option>
+            <option value="Annapurna">Annapurna</option>
+            <option value="Gasherbrum_I">Gasherbrum I</option>
+            <option value="Broad_Peak">Broad Peak</option>
+            <option value="Gasherbrum_II">Gasherbrum II</option>
+            <option value="Shishapangma">Shishapangma</option>
+        </select>
+
+        <!-- Botón para enviar la selección -->
+        <button type="submit">Enviar</button>
+
+        <!-- Mensaje informativo -->
+        <h2>( Luego espere unos instantes.. )</h2>
+    </form>
+</div>
+
+</body>
+</html>

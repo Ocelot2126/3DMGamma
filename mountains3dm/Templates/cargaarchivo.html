@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3DM App</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            background-color: #ddd;
+        }
+
+        /* Contenedor del Título */
+        .titulo-container {
+            margin-top: 25px;
+            background-color: white; /* Fondo blanco para el título */
+            padding: 12px; /* Espaciado interno */
+            border-radius: 8px; /* Bordes redondeados */
+        }
+
+        /* Título */
+        h1 {
+            margin: 0;
+            font: italic bold 36px/1.5 'Impact','Droid Sans','Roboto', monospace; 
+        }
+
+        /* Contenedor central */
+        #contenedor-central {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Ajustar la imagen */
+        img {
+            max-width: 230px;
+            height: auto;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+
+        /* Estilo del botón */
+        button {
+            width: 40%;
+            font-size: 16px;
+            font: italic 24px/1.5 'Impact', monospace;
+            padding: 5px 16px;
+            margin: 7px;
+            text-decoration: none;
+            color: black;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        /* Estilo del botón de selección de archivo */
+        input[type="file"] {
+            display: none; /* Ocultar el botón de selección de archivo */
+        }
+
+        label {
+            display: block;
+            width: 90%;
+            font-size: 16px;
+            font: italic 20px/1.5 'Impact', monospace;
+            padding: 10px 20px;
+            margin: 7px;
+            text-decoration: none;
+            color: white;
+            background-color: black;
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            img {
+                max-width: 50%;
+                height: auto;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media only screen and (min-width: 601px) {
+            body {
+                background: repeating-linear-gradient(to right, black, black 33.33%, #ddd 33.33%, #ddd 66.66%, black 66.66%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Contenedor central -->
+<div id="contenedor-central">
+    <!-- Contenedor del Título -->
+    <div class="titulo-container" alt="Logo" onclick="window.location.href='{% url 'main' %}';" style="cursor: pointer">
+        <!-- Título -->
+        <h1>3DM App</h1>
+    </div>
+
+    <!-- Imagen desde una URL con evento onclick -->
+    <img src="https://cdn.shopify.com/s/files/1/0815/5791/3873/files/logo_redondo_blanco-fotor-20231019182437.png?v=1697836252" alt="Logo" onclick="window.location.href='{% url 'main' %}';" style="cursor: pointer">
+
+    <form method="post" action="{% url 'cargaarchivo' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Botón para seleccionar archivo GPX -->
+        <label for="fileInput">Seleccione archivo GPX</label>
+        <input type="file" name="archivo_gpx" id="fileInput" accept=".gpx">
+    
+        <button type="submit">Enviar</button>
+    </form>
+    
+    <h3><a href="{% url 'main' %}">Volver atrás</a></h3>
+    
+</div>
+
+</body>
+</html>
